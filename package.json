@@ -1,0 +1,23 @@
+{
+  "name": "automacaodb",
+  "version": "1.0.0",
+  "description": "The creation of script to upload users from XLS files to SEI",
+  "main": "/src/scriptConversor.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/scriptConversor.js"
+  },
+  "author": "Daniel Quintela",
+  "license": "ISC",
+  "dependencies": {
+    "@types/xlsx": "^0.0.35",
+    "fast-csv": "^5.0.2",
+    "mysql2": "^3.14.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.17",
+    "typescript": "^5.8.3"
+  }
+}
