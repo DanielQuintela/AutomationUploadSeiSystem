@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "node dist/scriptConversor.js"
+    "start": "npm run build && node dist/scriptConversor.js"
   },
   "author": "Daniel Quintela",
   "license": "ISC",
