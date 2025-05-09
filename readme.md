@@ -76,8 +76,9 @@ SIN_BLOQUEADO=
 ID_ORGAO=
 ```
 
+---
 > ⚠️ A cada novo upload de dados para o banco, deve ser  inserido no `dotenv` o id do Ogao e os status do Sin
-
+##
 > ⚠️ O script só funcionará corretamente se essas variáveis forem definidas.
 
 ---
