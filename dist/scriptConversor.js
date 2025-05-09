@@ -74,7 +74,6 @@ async function importaUsuarios() {
     // Processar as linhas de dados
     for (let i = headerLineIndex + 1; i < rawData.length; i++) {
         const row = rawData[i].split(',').map((col) => col.trim());
-        // Extrair nome, email e cpf com base nos índices identificados
         const Nome = row[nomeIndex];
         const Email = row[emailIndex];
         const CPF = row[cpfIndex];
@@ -82,14 +81,15 @@ async function importaUsuarios() {
             // console.log(`Linha ignorada: ${JSON.stringify(row)}`);
             continue;
         }
-        // Gerar sigla a partir do email
         const sigla = typeof Email === 'string' && Email.includes('@') ? Email.split('@')[0] : null;
         const id_orgao = 0;
         const sin_ativo = "S";
         let nome_registro_civil = Nome;
         const sin_bloqueado = "N";
-        // console.log(CPF);
-        console.log(Nome);
+        if (Nome?.toLowerCase() === 'nome' || Email?.toLowerCase() === 'email' || CPF?.toLowerCase() === 'cpf') {
+            console.log(`Linha ignorada (repetição do cabeçalho): ${JSON.stringify(row)}`);
+            continue;
+        }
         usuarios.push([Nome, Email, CPF, sigla, id_orgao, sin_ativo, nome_registro_civil, sin_bloqueado]);
     }
     // console.log('Usuários processados:', usuarios);
@@ -97,17 +97,15 @@ async function importaUsuarios() {
         console.log('❌ Nenhum usuário válido encontrado.');
         return;
     }
-    // try {
-    //   // Inserir os dados no banco
-    //   await connection.query(
-    //     `INSERT INTO teste_usuario (nome, email, cpf, sigla, id_orgao, sin_ativo, nome_registro_civil, sin_bloqueado) VALUES ?`,
-    //     [usuarios]
-    //   );
-    //   console.log(`✅ Inseridos ${usuarios.length} usuários no banco.`);
-    // } catch (error) {
-    //   console.error('❌ Erro ao inserir usuários:', error);
-    // } finally {
-    //   await connection.end();
-    // }
+    try {
+        await connection.query(`INSERT INTO teste_usuario (nome, email, cpf, sigla, id_orgao, sin_ativo, nome_registro_civil, sin_bloqueado) VALUES ?`, [usuarios]);
+        console.log(`✅ Inseridos ${usuarios.length} usuários no banco.`);
+    }
+    catch (error) {
+        console.error('❌ Erro ao inserir usuários:', error);
+    }
+    finally {
+        await connection.end();
+    }
 }
 importaUsuarios().catch(console.error);
