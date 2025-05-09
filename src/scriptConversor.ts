@@ -1,4 +1,5 @@
 import path from 'path';
+const os = require('os');
 import * as XLSX from 'xlsx';
 import dbConnection from './database/connection';
 require('dotenv').config();
@@ -6,10 +7,12 @@ import fs from 'fs';
 
 async function importaUsuarios() {
   const connection = await dbConnection();
-  const filePath = path.resolve(__dirname, 'usuarios.xls');
+
+  const desktopDir = path.join(os.homedir(), 'Desktop', 'upload');
+  const filePath = path.resolve(desktopDir, 'usuarios.xls');
+
   const workbook = XLSX.readFile(filePath);
   const sheet = workbook.Sheets[workbook.SheetNames[0]];
-
   // Converter a planilha para CSV
   const csvFilePath = path.resolve(__dirname, 'usuarios.csv');
   const csvData = XLSX.utils.sheet_to_csv(sheet);
@@ -55,17 +58,26 @@ async function importaUsuarios() {
 
     const sigla = typeof Email === 'string' && Email.includes('@') ? Email.split('@')[0] : null;
 
-    const id_orgao = 0
-    const sin_ativo = "S"
+    const id_orgao = process.env.ID_ORGAO
+    const sin_ativo = process.env.SIN_ATIVO
     let nome_registro_civil = Nome
-    const sin_bloqueado = "N"
+    const sin_bloqueado = process.env.SIN_BLOQUEADO
     
     if (Nome?.toLowerCase() === 'nome' || Email?.toLowerCase() === 'email' || CPF?.toLowerCase() === 'cpf') {
       console.log(`Linha ignorada (repetição do cabeçalho): ${JSON.stringify(row)}`);
       continue;
     }
 
-    usuarios.push([Nome, Email, CPF, sigla, id_orgao, sin_ativo,nome_registro_civil, sin_bloqueado ]);
+    usuarios.push([
+      Nome, 
+      Email, 
+      CPF, 
+      sigla, 
+      id_orgao, 
+      sin_ativo,
+      nome_registro_civil, 
+      sin_bloqueado 
+    ]);
   }
 
   // console.log('Usuários processados:', usuarios);

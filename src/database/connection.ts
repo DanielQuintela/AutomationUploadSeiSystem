@@ -14,8 +14,6 @@ export default async function dbConnection() {
     });
 
     if (conn) console.log("Conexão com banco realizada com sucesso !");
-    
-
     return conn;
 };
  
