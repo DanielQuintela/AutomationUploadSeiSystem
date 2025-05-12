@@ -122,15 +122,13 @@ async function importaUsuarios() {
       sin_bloqueado,
       Acesso,
       Cargo,
-      departamentoAtual, // Associar o departamento atual ao usuário
+      departamentoAtual,
     ]);
 
-    console.log(users);
+    // console.log(users);
     
   }
-
   // console.log('Usuários processados:', usuarios);
-
   if (!usuarios.length) {
     console.log('❌ Nenhum usuário válido encontrado.');
     return;
