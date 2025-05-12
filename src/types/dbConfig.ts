@@ -9,3 +9,5 @@ type DbConfig = {
     batchSize: number;
   };
   
+
+type LastIdResult = { lastId: number | null };

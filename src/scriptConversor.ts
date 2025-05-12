@@ -43,6 +43,9 @@ async function importaUsuarios() {
   const emailIndex = header.indexOf('email');
   const cpfIndex = header.indexOf('cpf');
 
+  const [rows] = await connection.query('SELECT MAX(id_usuario) AS lastId FROM teste_usuario') as unknown as [LastIdResult[], any];
+  let lastId = rows[0]?.lastId ?? 100000000;
+  
   // Processar as linhas de dados
   for (let i = headerLineIndex + 1; i < rawData.length; i++) {
     const row = rawData[i].split(',').map((col) => col.trim());
@@ -64,11 +67,14 @@ async function importaUsuarios() {
     const sin_bloqueado = process.env.SIN_BLOQUEADO
     
     if (Nome?.toLowerCase() === 'nome' || Email?.toLowerCase() === 'email' || CPF?.toLowerCase() === 'cpf') {
-      console.log(`Linha ignorada (repetição do cabeçalho): ${JSON.stringify(row)}`);
+      // console.log(`Linha ignorada (repetição do cabeçalho): ${JSON.stringify(row)}`);
       continue;
     }
 
+    lastId += 1
+
     usuarios.push([
+      lastId,
       Nome, 
       Email, 
       CPF, 
@@ -79,7 +85,7 @@ async function importaUsuarios() {
       sin_bloqueado 
     ]);
   }
-
+    
   // console.log('Usuários processados:', usuarios);
 
   if (!usuarios.length) {
@@ -89,7 +95,7 @@ async function importaUsuarios() {
 
   try {
     await connection.query(
-      `INSERT INTO teste_usuario (nome, email, cpf, sigla, id_orgao, sin_ativo, nome_registro_civil, sin_bloqueado) VALUES ?`,
+      `INSERT INTO teste_usuario (id_usuario, nome, email, cpf, sigla, id_orgao, sin_ativo, nome_registro_civil, sin_bloqueado) VALUES ?`,
       [usuarios]
     );
     console.log(`✅ Inseridos ${usuarios.length} usuários no banco.`);
