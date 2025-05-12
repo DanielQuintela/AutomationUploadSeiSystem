@@ -2,12 +2,12 @@
   "name": "automacaodb",
   "version": "1.0.0",
   "description": "The creation of script to upload users from XLS files to SEI",
-  "main": "/src/scriptConversor.ts",
+  "main": "/src/userUploader.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "npm run build && node dist/scriptConversor.js",
-    "fstart": "node dist/scriptConversor.js"
+    "start": "npm run build && node dist/userUploader.js",
+    "fstart": "node dist/userUploader.js"
   },
   "author": "Daniel Quintela",
   "license": "ISC",

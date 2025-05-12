@@ -7,7 +7,6 @@ import fs from 'fs';
 import { LastIdResult } from './types/dbConfig';
 import userPermitions from './userPermitions';
 
-
 async function importaUsuarios() {
   const connection = await dbConnection();
 
@@ -24,6 +23,7 @@ async function importaUsuarios() {
   // Ler o CSV convertido
   const rawData: string[] = fs.readFileSync(csvFilePath, 'utf-8').split('\n');
   const usuarios: any[] = [];
+  const users: any[] = [];
 
   // Localizar a linha do cabeçalho
   let headerLineIndex = -1;
@@ -45,57 +45,94 @@ async function importaUsuarios() {
   const nomeIndex = header.indexOf('nome');
   const emailIndex = header.indexOf('email');
   const cpfIndex = header.indexOf('cpf');
-  const acesso = header.indexOf('perfil de acesso')
+  const acesso = header.indexOf('perfil de acesso');
+  const cargo = header.indexOf('cargo')
 
   const [rows] = await connection.query('SELECT MAX(id_usuario) AS lastId FROM teste_usuario') as unknown as [LastIdResult[], any];
   let lastId = rows[0]?.lastId ?? 100000000;
   
-  // Processar as linhas de dados
+  let departamentoAtual = '';
+
   for (let i = headerLineIndex + 1; i < rawData.length; i++) {
     const row = rawData[i].split(',').map((col) => col.trim());
 
+    if (row.some((col) => col.toLowerCase().startsWith('departamento:'))) {
+      const departamentoLinha = row.find((col) => col.toLowerCase().startsWith('departamento:'));
+      if (departamentoLinha) {
+        // Extrair o texto entre ":" e "-"
+        const match = departamentoLinha.match(/departamento:\s*(.*?)\s*-/i);
+        if (match && match[1]) {
+          departamentoAtual = match[1].trim(); // Atualizar o departamento atual
+          console.log(`Departamento identificado: ${departamentoAtual}`);
+        }
+      }
+      continue; 
+    };
+    
     const Nome = row[nomeIndex];
     const Email = row[emailIndex];
     const CPF = row[cpfIndex];
-    const Acesso = row[acesso]
-    console.log(Acesso);
-    
-    if (!Nome || !Email || !CPF) {
-  
+    const Acesso = row[acesso];
+    const Cargo = row[cargo];
+
+    if (!Nome || !Email || !CPF || !Acesso || !Cargo) {
       continue;
-    }
+    };
 
     const sigla = typeof Email === 'string' && Email.includes('@') ? Email.split('@')[0] : null;
 
-    const id_orgao = process.env.ID_ORGAO
-    const sin_ativo = process.env.SIN_ATIVO
-    let nome_registro_civil = Nome
-    const sin_bloqueado = process.env.SIN_BLOQUEADO
-    
-    if (Nome?.toLowerCase() === 'nome' || Email?.toLowerCase() === 'email' || CPF?.toLowerCase() === 'cpf') {
+    const id_orgao = process.env.ID_ORGAO;
+    const sin_ativo = process.env.SIN_ATIVO;
+    let nome_registro_civil = Nome;
+    const sin_bloqueado = process.env.SIN_BLOQUEADO;
 
+    if (
+      Nome?.toLowerCase()   === 'nome' ||
+      Email?.toLowerCase()  === 'email' ||
+      CPF?.toLowerCase()    === 'cpf' ||
+      Acesso?.toLowerCase() === 'perfil de acesso' ||
+      Cargo?.toLowerCase()  === 'cargo'
+    ) {
       continue;
-    }
+    };
 
-    lastId += 1
+    lastId += 1;
 
     usuarios.push([
       lastId,
-      Nome, 
-      Email, 
-      CPF, 
-      sigla, 
-      id_orgao, 
+      Nome,
+      Email,
+      CPF,
+      sigla,
+      id_orgao,
       sin_ativo,
-      nome_registro_civil, 
-      sin_bloqueado 
+      nome_registro_civil,
+      sin_bloqueado,
     ]);
-  }
-    
 
+    users.push([
+      lastId,
+      Nome,
+      Email,
+      CPF,
+      sigla,
+      id_orgao,
+      sin_ativo,
+      nome_registro_civil,
+      sin_bloqueado,
+      Acesso,
+      Cargo,
+      departamentoAtual, // Associar o departamento atual ao usuário
+    ]);
+
+    console.log(users);
+    
+  }
+
+  // console.log('Usuários processados:', usuarios);
 
   if (!usuarios.length) {
-  
+    console.log('❌ Nenhum usuário válido encontrado.');
     return;
   }
 
@@ -104,14 +141,13 @@ async function importaUsuarios() {
       `INSERT INTO ${process.env.DB_NAME} (id_usuario, nome, email, cpf, sigla, id_orgao, sin_ativo, nome_registro_civil, sin_bloqueado) VALUES ?`,
       [usuarios]
     );
-
+    console.log(`✅ Inseridos ${usuarios.length} usuários no banco.!!`);
   } catch (error) {
     console.error('❌ Erro ao inserir usuários:', error);
   } finally {
     await connection.end();
   }
-
-  userPermitions(usuarios);
+  userPermitions(users);
 }
 
 importaUsuarios().catch(console.error);
