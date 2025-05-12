@@ -4,6 +4,9 @@ import * as XLSX from 'xlsx';
 import dbConnection from './database/connection';
 require('dotenv').config();
 import fs from 'fs';
+import { LastIdResult } from './types/dbConfig';
+import userPermitions from './userPermitions';
+
 
 async function importaUsuarios() {
   const connection = await dbConnection();
@@ -42,6 +45,7 @@ async function importaUsuarios() {
   const nomeIndex = header.indexOf('nome');
   const emailIndex = header.indexOf('email');
   const cpfIndex = header.indexOf('cpf');
+  const acesso = header.indexOf('perfil de acesso')
 
   const [rows] = await connection.query('SELECT MAX(id_usuario) AS lastId FROM teste_usuario') as unknown as [LastIdResult[], any];
   let lastId = rows[0]?.lastId ?? 100000000;
@@ -53,9 +57,11 @@ async function importaUsuarios() {
     const Nome = row[nomeIndex];
     const Email = row[emailIndex];
     const CPF = row[cpfIndex];
-
+    const Acesso = row[acesso]
+    console.log(Acesso);
+    
     if (!Nome || !Email || !CPF) {
-      // console.log(`Linha ignorada: ${JSON.stringify(row)}`);
+  
       continue;
     }
 
@@ -67,7 +73,7 @@ async function importaUsuarios() {
     const sin_bloqueado = process.env.SIN_BLOQUEADO
     
     if (Nome?.toLowerCase() === 'nome' || Email?.toLowerCase() === 'email' || CPF?.toLowerCase() === 'cpf') {
-      // console.log(`Linha ignorada (repetição do cabeçalho): ${JSON.stringify(row)}`);
+
       continue;
     }
 
@@ -86,24 +92,26 @@ async function importaUsuarios() {
     ]);
   }
     
-  // console.log('Usuários processados:', usuarios);
+
 
   if (!usuarios.length) {
-    console.log('❌ Nenhum usuário válido encontrado.');
+  
     return;
   }
 
   try {
     await connection.query(
-      `INSERT INTO teste_usuario (id_usuario, nome, email, cpf, sigla, id_orgao, sin_ativo, nome_registro_civil, sin_bloqueado) VALUES ?`,
+      `INSERT INTO ${process.env.DB_NAME} (id_usuario, nome, email, cpf, sigla, id_orgao, sin_ativo, nome_registro_civil, sin_bloqueado) VALUES ?`,
       [usuarios]
     );
-    console.log(`✅ Inseridos ${usuarios.length} usuários no banco.`);
+
   } catch (error) {
     console.error('❌ Erro ao inserir usuários:', error);
   } finally {
     await connection.end();
   }
+
+  userPermitions(usuarios);
 }
 
 importaUsuarios().catch(console.error);

@@ -11,3 +11,5 @@ type DbConfig = {
   
 
 type LastIdResult = { lastId: number | null };
+
+export { DbConfig, LastIdResult}
