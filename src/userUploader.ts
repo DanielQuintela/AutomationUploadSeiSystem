@@ -6,6 +6,7 @@ require('dotenv').config();
 import fs from 'fs';
 import { LastIdResult } from './types/dbConfig';
 import userPermitions from './userPermitions';
+import { UserInterface } from './types/users';
 
 async function importaUsuarios() {
   const connection = await dbConnection();
@@ -23,7 +24,7 @@ async function importaUsuarios() {
   // Ler o CSV convertido
   const rawData: string[] = fs.readFileSync(csvFilePath, 'utf-8').split('\n');
   const usuarios: any[] = [];
-  const users: any[] = [];
+  const users: UserInterface[] = [];
 
   // Localizar a linha do cabeçalho
   let headerLineIndex = -1;
@@ -110,20 +111,20 @@ async function importaUsuarios() {
       sin_bloqueado,
     ]);
 
-    users.push([
-      lastId,
-      Nome,
-      Email,
-      CPF,
-      sigla,
-      id_orgao,
-      sin_ativo,
-      nome_registro_civil,
-      sin_bloqueado,
-      Acesso,
-      Cargo,
-      departamentoAtual,
-    ]);
+   users.push({
+      id_usuario: lastId,
+      nome: Nome,
+      email: Email,
+      cpf: CPF,
+      sigla: sigla,
+      id_orgao: id_orgao,
+      sin_ativo: sin_ativo,
+      nome_registro_civil: nome_registro_civil,
+      sin_bloqueado: sin_bloqueado,
+      acesso: Acesso,
+      cargo: Cargo,
+      departamento: departamentoAtual,
+    });
 
     // console.log(users);
     

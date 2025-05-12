@@ -1,24 +1,14 @@
-type userTypes = {
-    id_usuario: number
-    Nome: number
-    email: string
-    CPF: number
-    sigla: string
-    id_orgao: number
-    sin_ativo: string
-    nome_registro_civil: string
-    sin_bloqueado: string
+export interface UserInterface {
+  id_usuario: number;
+  nome: string;
+  email: string;
+  cpf: string;
+  sigla: string | null;
+  id_orgao: string | undefined;
+  sin_ativo: string | undefined;
+  nome_registro_civil: string;
+  sin_bloqueado: string | undefined;
+  acesso: string;
+  cargo: string;
+  departamento: string;
 }
-
-
-export { userTypes }
-
-// lastId,
-// Nome, 
-// Email, 
-// CPF, 
-// sigla, 
-// id_orgao, 
-// sin_ativo,
-// nome_registro_civil, 
-// sin_bloqueado 
