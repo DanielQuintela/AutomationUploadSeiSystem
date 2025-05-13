@@ -133,7 +133,7 @@ async function importaUsuarios() {
 
   try {
     await connection.query(
-      `INSERT INTO ${process.env.DB_NAME} (id_usuario, nome, email, cpf, sigla, id_orgao, sin_ativo, nome_registro_civil, sin_bloqueado) VALUES ?`,
+      `INSERT INTO ${process.env.USER_DB} (id_usuario, nome, email, cpf, sigla, id_orgao, sin_ativo, nome_registro_civil, sin_bloqueado) VALUES ?`,
       [usuarios]
     );
     console.log(`✅ Inseridos ${usuarios.length} usuários no banco.!!`);
