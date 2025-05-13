@@ -1,31 +1,20 @@
-import path from 'path';
-const os = require('os');
-import * as XLSX from 'xlsx';
 import dbConnection from './database/connection';
 require('dotenv').config();
-import fs from 'fs';
 import { LastIdResult } from './types/dbConfig';
 import userPermitions from './userPermitions';
 import { UserInterface } from './types/users';
+import readXlsFunction from './services/readXlsFunction';
+import fs from 'fs';
 
 async function importaUsuarios() {
   const connection = await dbConnection();
-
-  const desktopDir = path.join(os.homedir(), 'Desktop', 'upload');
-  const filePath = path.resolve(desktopDir, 'usuarios.xls');
-
-  const workbook = XLSX.readFile(filePath);
-  const sheet = workbook.Sheets[workbook.SheetNames[0]];
-  // Converter a planilha para CSV
-  const csvFilePath = path.resolve(__dirname, 'usuarios.csv');
-  const csvData = XLSX.utils.sheet_to_csv(sheet);
-  fs.writeFileSync(csvFilePath, csvData);
+  const csvFilePath = readXlsFunction()
+  const usuarios: any[] = [];
+  const users: UserInterface[] = [];
+  let departamentoAtual = '';
 
   // Ler o CSV convertido
   const rawData: string[] = fs.readFileSync(csvFilePath, 'utf-8').split('\n');
-  const usuarios: any[] = [];
-  const users: UserInterface[] = [];
-
   // Localizar a linha do cabeçalho
   let headerLineIndex = -1;
   let header: string[] = [];
@@ -42,7 +31,6 @@ async function importaUsuarios() {
     console.error('❌ Não foi possível localizar as colunas Nome, Email ou CPF no arquivo.');
     return;
   }
-
   const nomeIndex = header.indexOf('nome');
   const emailIndex = header.indexOf('email');
   const cpfIndex = header.indexOf('cpf');
@@ -51,8 +39,6 @@ async function importaUsuarios() {
 
   const [rows] = await connection.query('SELECT MAX(id_usuario) AS lastId FROM teste_usuario') as unknown as [LastIdResult[], any];
   let lastId = rows[0]?.lastId ?? 100000000;
-  
-  let departamentoAtual = '';
 
   for (let i = headerLineIndex + 1; i < rawData.length; i++) {
     const row = rawData[i].split(',').map((col) => col.trim());
@@ -74,7 +60,7 @@ async function importaUsuarios() {
     const CPF = row[cpfIndex];
     const Acesso = row[acesso];
     const Cargo = row[cargo];
-
+    
     if (!Nome || !Email || !CPF || !Acesso || !Cargo) {
       continue;
     };
