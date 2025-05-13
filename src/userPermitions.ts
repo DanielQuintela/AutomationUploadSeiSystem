@@ -8,8 +8,7 @@ export default async function userPermitions(usuarios: UserInterface[]) {
     const connection = await dbConnection();
     const permitions:any[] = []
     
-    console.log( getPerfilId("colaborador"));
-    
+     // TOOD: NÃO SUBIR ESSE ARQUIVO NO MERGE
     for (let i = 0; i < usuarios.length ; i++) {
 
         const acesso = usuarios[i].acesso.toLocaleLowerCase().replace(/\s+/g, '');
@@ -17,22 +16,13 @@ export default async function userPermitions(usuarios: UserInterface[]) {
 
         const id_perfil = getPerfilId(acesso);
         const id_unidade = getUnitID(unidade);
-        
-        const id_usuario = usuarios[i].id_usuario;
-        const id_sistema = process.env.ID_SISTEMA;
-        const id_tipo_permissao = 1
-        const sin_subunidades = process.env.SIN_SUBUNIDADES
-        const data = getCurrentDate();
-        
-        permitions.push([
-            id_perfil,
-            id_sistema,
-            id_usuario,
-            // id_unidade,
-            id_tipo_permissao,
-            data,
-            sin_subunidades
-        ]);
+
+        console.log(acesso);
+        console.log(id_perfil);
+
+        console.log(unidade)
+        console.log(id_unidade);
+       
         
     }
     
