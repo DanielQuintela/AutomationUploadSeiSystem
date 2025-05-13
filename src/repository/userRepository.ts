@@ -1,6 +1,7 @@
 import dbConnection from "../database/connection";
+import { UserPermitionsInterface, UserToDBInterface } from "../types/users";
 
-export async function uploadUsers(usuarios: any){
+export async function uploadUsers(usuarios: UserToDBInterface[]){
     const connection = await dbConnection();
     try {
     await connection.query(
@@ -15,8 +16,9 @@ export async function uploadUsers(usuarios: any){
   }
 }
 
-export async function UploadUserPermitions(permitions: any){
+export async function UploadUserPermitions(permitions: UserPermitionsInterface[]){
    const connection = await dbConnection();
+console.log(permitions);
 
    try {
     await connection.query(
