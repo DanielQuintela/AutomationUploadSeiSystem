@@ -2,7 +2,7 @@ import dbConnection from './database/connection';
 require('dotenv').config();
 import { LastIdResult } from './types/dbConfig';
 import userPermitions from './userPermitions';
-import { UserInterface } from './types/users';
+import { UserInterface, UserToDBInterface } from './types/users';
 import readXlsFunction from './services/readXlsFunction';
 import fs from 'fs';
 import { uploadUsers } from './repository/userRepository';
@@ -10,7 +10,7 @@ import { uploadUsers } from './repository/userRepository';
 async function importaUsuarios() {
   const connection = await dbConnection();
   const csvFilePath = readXlsFunction()
-  const usuarios: any[] = [];
+  const usuarios: UserToDBInterface[] = [];
   const users: UserInterface[] = [];
   let departamentoAtual = '';
 
@@ -85,17 +85,17 @@ async function importaUsuarios() {
 
     lastId += 1;
 
-    usuarios.push([
-      lastId,
-      Nome,
-      Email,
-      CPF,
-      sigla,
-      id_orgao,
-      sin_ativo,
-      nome_registro_civil,
-      sin_bloqueado,
-    ]);
+    usuarios.push({
+      id_usuario: lastId,
+      nome: Nome,
+      email: Email,
+      cpf: CPF,
+      sigla: sigla,
+      id_orgao: id_orgao,
+      sin_ativo: sin_ativo,
+      nome_registro_civil: nome_registro_civil,
+      sin_bloqueado: sin_bloqueado,
+    });
 
    users.push({
       id_usuario: lastId,
