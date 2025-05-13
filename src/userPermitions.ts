@@ -9,12 +9,11 @@ export default async function userPermitions(usuarios: UserInterface[]) {
     const permitions:any[] = []
     
     console.log( getPerfilId("colaborador"));
-    console.log(usuarios.length);
     
     for (let i = 0; i < usuarios.length ; i++) {
 
-        const acesso  = usuarios[i].acesso.toLocaleLowerCase();
-        const unidade = usuarios[i].departamento.toLocaleLowerCase();
+        const acesso = usuarios[i].acesso.toLocaleLowerCase().replace(/\s+/g, '');
+        const unidade = usuarios[i].departamento.toLocaleLowerCase().replace(/\s+/g, '');
 
         const id_perfil = getPerfilId(acesso);
         // const id_unidade = getDepartmentID(unidade);
