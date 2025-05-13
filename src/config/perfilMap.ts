@@ -11,7 +11,8 @@ export const perfilMap: Record<string, number> = {
   basico: 100000932,
   basicoduplicado: 100000938, // Nome duplicado com ID diferente
   cadastrodeusuarioseunidades: 100000937,
-  colaboradorbasicosemassinatura: 100000947,
+  colaborador: 100000947,
+  colaboradorsga: 100000947,
   coordenadordeperfil: 100000936,
   coordenadordeunidade: 100000946,
   informatica: 100000940,

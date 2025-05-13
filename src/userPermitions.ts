@@ -1,7 +1,7 @@
 import dbConnection from "./database/connection";
 import { UserInterface } from "./types/users";
 import getCurrentDate from "./utils/getDataTime";
-// import { getUnitID } from "./utils/getUnit";
+import { getUnitID } from "./utils/getUnitID";
 import { getPerfilId } from "./utils/getPerfilIds";
 
 export default async function userPermitions(usuarios: UserInterface[]) { 
@@ -16,7 +16,8 @@ export default async function userPermitions(usuarios: UserInterface[]) {
         const unidade = usuarios[i].departamento.toLocaleLowerCase().replace(/\s+/g, '');
 
         const id_perfil = getPerfilId(acesso);
-        // const id_unidade = getDepartmentID(unidade);
+        const id_unidade = getUnitID(unidade);
+        
         const id_usuario = usuarios[i].id_usuario;
         const id_sistema = process.env.ID_SISTEMA;
         const id_tipo_permissao = 1

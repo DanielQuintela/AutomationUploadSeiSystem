@@ -1,6 +1,5 @@
-// TODO: DESCOMENTAR QUANDO A BRANCH DA BIBLIOTECA SUBIR
-// import { departmentMap } from '../config/departmentMap';
+import { unitMAP } from '../config/unitMap';
 
-// export function getUnitID(unitName: string): number | undefined {
-//   return perfilMap[unitName];
-// }
+export function getUnitID(unitName: string): number | undefined {
+  return unitMAP[unitName];
+}
