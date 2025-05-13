@@ -22,19 +22,30 @@ export default async function userPermitions(usuarios: UserInterface[]) {
         const id_sistema = process.env.ID_SISTEMA;
         const id_tipo_permissao = 1
         const sin_subunidades = process.env.SIN_SUBUNIDADES
-        const data = getCurrentDate();
+        const dta_inicio = getCurrentDate();
         
         permitions.push([
             id_perfil,
             id_sistema,
             id_usuario,
-            // id_unidade,
+            id_unidade,
             id_tipo_permissao,
-            data,
+            dta_inicio,
             sin_subunidades
         ]);
-        
-    }
+    };
+
+    try {
+    await connection.query(
+      `INSERT INTO ${process.env.PERMISSION_DB} (id_perfil, id_sistema, id_usuario, id_unidade, id_tipo_permissao, dta_inicio, sin_subunidades) VALUES ?`,
+      [permitions]
+    );
+    console.log(`✅ Inseridas ${permitions.length} permissões no banco.!!`);
+  } catch (error) {
+    console.error('❌ Erro ao inserir permissões:', error);
+  } finally {
+    await connection.end();
+  }
     
 }
 
