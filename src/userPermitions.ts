@@ -7,8 +7,7 @@ import { getPerfilId } from "./utils/getPerfilIds";
 export default async function userPermitions(usuarios: UserInterface[]) { 
     const connection = await dbConnection();
     const permitions:any[] = []
-    
-     // TOOD: NÃO SUBIR ESSE ARQUIVO NO MERGE
+            
     for (let i = 0; i < usuarios.length ; i++) {
 
         const acesso = usuarios[i].acesso.toLocaleLowerCase().replace(/\s+/g, '');
@@ -16,15 +15,35 @@ export default async function userPermitions(usuarios: UserInterface[]) {
 
         const id_perfil = getPerfilId(acesso);
         const id_unidade = getUnitID(unidade);
-
-        console.log(acesso);
-        console.log(id_perfil);
-
-        console.log(unidade)
-        console.log(id_unidade);
-       
         
-    }
+        const id_usuario = usuarios[i].id_usuario;
+        const id_sistema = process.env.ID_SISTEMA;
+        const id_tipo_permissao = 1
+        const sin_subunidades = process.env.SIN_SUBUNIDADES
+        const dta_inicio = getCurrentDate();
+        
+        permitions.push([
+            id_perfil,
+            id_sistema,
+            id_usuario,
+            id_unidade,
+            id_tipo_permissao,
+            dta_inicio,
+            sin_subunidades
+        ]);
+    };
+
+    try {
+    await connection.query(
+      `INSERT INTO ${process.env.PERMISSION_DB} (id_perfil, id_sistema, id_usuario, id_unidade, id_tipo_permissao, dta_inicio, sin_subunidades) VALUES ?`,
+      [permitions]
+    );
+    console.log(`✅ Inseridas ${permitions.length} permissões no banco.!!`);
+  } catch (error) {
+    console.error('❌ Erro ao inserir permissões:', error);
+  } finally {
+    await connection.end();
+  }
     
 }
 

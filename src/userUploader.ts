@@ -132,11 +132,11 @@ async function importaUsuarios() {
   }
 
   try {
-    // await connection.query(
-    //   `INSERT INTO ${process.env.DB_NAME} (id_usuario, nome, email, cpf, sigla, id_orgao, sin_ativo, nome_registro_civil, sin_bloqueado) VALUES ?`,
-    //   [usuarios]
-    // );
-    // console.log(`✅ Inseridos ${usuarios.length} usuários no banco.!!`);
+    await connection.query(
+      `INSERT INTO ${process.env.DB_NAME} (id_usuario, nome, email, cpf, sigla, id_orgao, sin_ativo, nome_registro_civil, sin_bloqueado) VALUES ?`,
+      [usuarios]
+    );
+    console.log(`✅ Inseridos ${usuarios.length} usuários no banco.!!`);
   } catch (error) {
     console.error('❌ Erro ao inserir usuários:', error);
   } finally {
