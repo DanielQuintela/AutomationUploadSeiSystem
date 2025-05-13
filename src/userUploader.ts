@@ -5,6 +5,7 @@ import userPermitions from './userPermitions';
 import { UserInterface } from './types/users';
 import readXlsFunction from './services/readXlsFunction';
 import fs from 'fs';
+import { uploadUsers } from './repository/userRepository';
 
 async function importaUsuarios() {
   const connection = await dbConnection();
@@ -60,7 +61,7 @@ async function importaUsuarios() {
     const CPF = row[cpfIndex];
     const Acesso = row[acesso];
     const Cargo = row[cargo];
-
+    
     if (!Nome || !Email || !CPF || !Acesso || !Cargo) {
       continue;
     };
@@ -111,22 +112,13 @@ async function importaUsuarios() {
       departamento: departamentoAtual,
     });    
   }
-  // console.log('Usuários processados:', usuarios);r
   if (!usuarios.length) {
     console.log('❌ Nenhum usuário válido encontrado.');
     return;
   }
-  try {
-    await connection.query(
-      `INSERT INTO ${process.env.USER_DB} (id_usuario, nome, email, cpf, sigla, id_orgao, sin_ativo, nome_registro_civil, sin_bloqueado) VALUES ?`,
-      [usuarios]
-    );
-    console.log(`✅ Inseridos ${usuarios.length} usuários no banco.!!`);
-  } catch (error) {
-    console.error('❌ Erro ao inserir usuários:', error);
-  } finally {
-    await connection.end();
-  }
+
+  await uploadUsers(usuarios);
+ 
   userPermitions(users);
 }
 

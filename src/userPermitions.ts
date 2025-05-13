@@ -3,6 +3,7 @@ import { UserInterface } from "./types/users";
 import getCurrentDate from "./utils/getDataTime";
 import { getUnitID } from "./utils/getUnitID";
 import { getPerfilId } from "./utils/getPerfilIds";
+import { UploadUserPermitions } from "./repository/userRepository";
 
 export default async function userPermitions(usuarios: UserInterface[]) { 
     const connection = await dbConnection();
@@ -35,17 +36,7 @@ export default async function userPermitions(usuarios: UserInterface[]) {
         ]);
     };
 
-    try {
-    await connection.query(
-      `INSERT INTO ${process.env.PERMISSION_DB} (id_perfil, id_sistema, id_usuario, id_unidade, id_tipo_permissao, dta_inicio, sin_subunidades) VALUES ?`,
-      [permitions]
-    );
-    console.log(`✅ Inseridas ${permitions.length} permissões no banco.!!`);
-  } catch (error) {
-    console.error('❌ Erro ao inserir permissões:', error);
-  } finally {
-    await connection.end();
-  }
+    await UploadUserPermitions(permitions);
     
 }
 
