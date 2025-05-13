@@ -1,15 +1,40 @@
 import dbConnection from "./database/connection";
 import { UserInterface } from "./types/users";
+import getCurrentDate from "./utils/getDataTime";
+// import { getUnitID } from "./utils/getUnit";
 import { getPerfilId } from "./utils/getPerfilIds";
 
 export default async function userPermitions(usuarios: UserInterface[]) { 
     const connection = await dbConnection();
+    const permitions:any[] = []
     
     console.log( getPerfilId("colaborador"));
-
+    console.log(usuarios.length);
+    
     for (let i = 0; i < usuarios.length ; i++) {
-        console.log(usuarios[i].cargo);
+
+        const acesso  = usuarios[i].acesso.toLocaleLowerCase();
+        const unidade = usuarios[i].departamento.toLocaleLowerCase();
+
+        const id_perfil = getPerfilId(acesso);
+        // const id_unidade = getDepartmentID(unidade);
+        const id_usuario = usuarios[i].id_usuario;
+        const id_sistema = process.env.ID_SISTEMA;
+        const id_tipo_permissao = 1
+        const sin_subunidades = process.env.SIN_SUBUNIDADES
+        const data = getCurrentDate();
+        
+        permitions.push([
+            id_perfil,
+            id_sistema,
+            id_usuario,
+            // id_unidade,
+            id_tipo_permissao,
+            data,
+            sin_subunidades
+        ]);
         
     }
     
 }
+

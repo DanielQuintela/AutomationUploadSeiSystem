@@ -60,7 +60,6 @@ async function importaUsuarios() {
     if (row.some((col) => col.toLowerCase().startsWith('departamento:'))) {
       const departamentoLinha = row.find((col) => col.toLowerCase().startsWith('departamento:'));
       if (departamentoLinha) {
-        // Extrair o texto entre ":" e "-"
         const match = departamentoLinha.match(/departamento:\s*(.*?)\s*-/i);
         if (match && match[1]) {
           departamentoAtual = match[1].trim(); // Atualizar o departamento atual
@@ -124,10 +123,7 @@ async function importaUsuarios() {
       acesso: Acesso,
       cargo: Cargo,
       departamento: departamentoAtual,
-    });
-
-    // console.log(users);
-    
+    });    
   }
   // console.log('Usuários processados:', usuarios);
   if (!usuarios.length) {
@@ -136,11 +132,11 @@ async function importaUsuarios() {
   }
 
   try {
-    await connection.query(
-      `INSERT INTO ${process.env.DB_NAME} (id_usuario, nome, email, cpf, sigla, id_orgao, sin_ativo, nome_registro_civil, sin_bloqueado) VALUES ?`,
-      [usuarios]
-    );
-    console.log(`✅ Inseridos ${usuarios.length} usuários no banco.!!`);
+    // await connection.query(
+    //   `INSERT INTO ${process.env.DB_NAME} (id_usuario, nome, email, cpf, sigla, id_orgao, sin_ativo, nome_registro_civil, sin_bloqueado) VALUES ?`,
+    //   [usuarios]
+    // );
+    // console.log(`✅ Inseridos ${usuarios.length} usuários no banco.!!`);
   } catch (error) {
     console.error('❌ Erro ao inserir usuários:', error);
   } finally {
