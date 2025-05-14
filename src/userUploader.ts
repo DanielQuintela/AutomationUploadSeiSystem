@@ -26,7 +26,7 @@ async function importaUsuarios() {
         const match = departamentoLinha.match(/departamento:\s*(.*?)\s*-/i);
         if (match && match[1]) {
           const departamento = match[1].trim();
-          fs.appendFileSync('log-processamento.txt', `Departamento capturado na linha ${i}: ${departamento}\n`);
+          // fs.appendFileSync('log-processamento.txt', `Departamento capturado na linha ${i}: ${departamento}\n`);
         } else {
           console.log(`Departamento não identificado na linha ${i}: ${departamentoLinha}`);
         }
@@ -110,6 +110,27 @@ async function importaUsuarios() {
 
     lastId += 1;
 
+    // Verificar se a sigla já está cadastrada
+    const siglaJaCadastrada = usuarios.some(user => user.sigla === sigla);
+
+    if (siglaJaCadastrada) {
+      users.push({
+        id_usuario: lastId,
+        nome: Nome,
+        email: Email,
+        cpf: CPF,
+        sigla: sigla,
+        id_orgao: id_orgao,
+        sin_ativo: sin_ativo,
+        nome_registro_civil: nome_registro_civil,
+        sin_bloqueado: sin_bloqueado,
+        acesso: Acesso,
+        cargo: Cargo,
+        departamento: departamentoAtual,
+      });
+      continue;
+    }
+
     usuarios.push({
       id_usuario: lastId,
       nome: Nome,
@@ -122,7 +143,7 @@ async function importaUsuarios() {
       sin_bloqueado: sin_bloqueado,
     });
 
-   users.push({
+    users.push({
       id_usuario: lastId,
       nome: Nome,
       email: Email,
@@ -135,8 +156,9 @@ async function importaUsuarios() {
       acesso: Acesso,
       cargo: Cargo,
       departamento: departamentoAtual,
-    });    
+    });
   }
+  
   if (!usuarios.length) {
     console.log('❌ Nenhum usuário válido encontrado.');
     return;
@@ -144,7 +166,7 @@ async function importaUsuarios() {
 
   await uploadUsers(usuarios);
  
-  userPermitions(users);
+  // userPermitions(users);
 }
 
 importaUsuarios().catch(console.error);
