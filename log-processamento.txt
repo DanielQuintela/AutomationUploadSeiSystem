@@ -1,0 +1,96 @@
+Departamento capturado na linha 11: ÁREA FINANCEIRA E CONTÁBIL
+Departamento capturado na linha 39: ÁREA DE CONTRATAÇÃO E SERVIÇOS ADMINISTRATIVOS
+Departamento capturado na linha 72: ÁREA DE INFRAESTRUTURA
+Departamento capturado na linha 123: ÁREA DE PESSOAL
+Departamento capturado na linha 156: ÁREA DE SISTEMA DA INFORMAÇÃO
+Departamento capturado na linha 225: ARQUIVO
+Departamento capturado na linha 241: ASSESSORIA DE COMUNICAÇÃO
+Departamento capturado na linha 252: ASSESSORIA DE CONTROLE INTERNO
+Departamento capturado na linha 263: ASSESSORIA DE PLANEJAMENTO ESTRATÉGICO
+Departamento capturado na linha 271: ASSESSORIA JURÍDICA
+Departamento capturado na linha 290: COMISSÃO DE ESTAGIO
+Departamento capturado na linha 316: COMISSÃO DE LICITAÇÃO
+Departamento capturado na linha 329: COMISSÃO DISCIPLINAR PERMANENTE
+Departamento capturado na linha 340: COMISSÃO ELEITORAL
+Departamento capturado na linha 353: COMISSÃO INTERNA DE PREVENÇÃO DE ACIDENTES
+Departamento capturado na linha 374: CONSELHO DE ADMINISTRAÇÃO
+Departamento capturado na linha 400: CONSELHO FISCAL
+Departamento capturado na linha 421: COORDENADORIA DE FINANÇAS
+Departamento capturado na linha 429: COORDENADORIA DE PAGAMENTO
+Departamento capturado na linha 440: DIRETORIA DE ADMINISTRAÇÃO E FINANÇAS
+Departamento capturado na linha 453: DIRETORIA DE TECNOLOGIA
+Departamento capturado na linha 469: GRUPO DE TRABALHO DE CIBERSEGURANÇA
+Departamento capturado na linha 485: PRESIDÊNCIA
+Departamento capturado na linha 501: PROTOCOLO
+Departamento capturado na linha 11: ÁREA FINANCEIRA E CONTÁBIL
+Departamento capturado na linha 39: ÁREA DE CONTRATAÇÃO E SERVIÇOS ADMINISTRATIVOS
+Departamento capturado na linha 72: ÁREA DE INFRAESTRUTURA
+Departamento capturado na linha 123: ÁREA DE PESSOAL
+Departamento capturado na linha 156: ÁREA DE SISTEMA DA INFORMAÇÃO
+Departamento capturado na linha 225: ARQUIVO
+Departamento capturado na linha 241: ASSESSORIA DE COMUNICAÇÃO
+Departamento capturado na linha 252: ASSESSORIA DE CONTROLE INTERNO
+Departamento capturado na linha 263: ASSESSORIA DE PLANEJAMENTO ESTRATÉGICO
+Departamento capturado na linha 271: ASSESSORIA JURÍDICA
+Departamento capturado na linha 290: COMISSÃO DE ESTAGIO
+Departamento capturado na linha 316: COMISSÃO DE LICITAÇÃO
+Departamento capturado na linha 329: COMISSÃO DISCIPLINAR PERMANENTE
+Departamento capturado na linha 340: COMISSÃO ELEITORAL
+Departamento capturado na linha 353: COMISSÃO INTERNA DE PREVENÇÃO DE ACIDENTES
+Departamento capturado na linha 374: CONSELHO DE ADMINISTRAÇÃO
+Departamento capturado na linha 400: CONSELHO FISCAL
+Departamento capturado na linha 421: COORDENADORIA DE FINANÇAS
+Departamento capturado na linha 429: COORDENADORIA DE PAGAMENTO
+Departamento capturado na linha 440: DIRETORIA DE ADMINISTRAÇÃO E FINANÇAS
+Departamento capturado na linha 453: DIRETORIA DE TECNOLOGIA
+Departamento capturado na linha 469: GRUPO DE TRABALHO DE CIBERSEGURANÇA
+Departamento capturado na linha 485: PRESIDÊNCIA
+Departamento capturado na linha 501: PROTOCOLO
+Departamento capturado na linha 11: ÁREA FINANCEIRA E CONTÁBIL
+Departamento capturado na linha 39: ÁREA DE CONTRATAÇÃO E SERVIÇOS ADMINISTRATIVOS
+Departamento capturado na linha 72: ÁREA DE INFRAESTRUTURA
+Departamento capturado na linha 123: ÁREA DE PESSOAL
+Departamento capturado na linha 156: ÁREA DE SISTEMA DA INFORMAÇÃO
+Departamento capturado na linha 225: ARQUIVO
+Departamento capturado na linha 241: ASSESSORIA DE COMUNICAÇÃO
+Departamento capturado na linha 252: ASSESSORIA DE CONTROLE INTERNO
+Departamento capturado na linha 263: ASSESSORIA DE PLANEJAMENTO ESTRATÉGICO
+Departamento capturado na linha 271: ASSESSORIA JURÍDICA
+Departamento capturado na linha 290: COMISSÃO DE ESTAGIO
+Departamento capturado na linha 316: COMISSÃO DE LICITAÇÃO
+Departamento capturado na linha 329: COMISSÃO DISCIPLINAR PERMANENTE
+Departamento capturado na linha 340: COMISSÃO ELEITORAL
+Departamento capturado na linha 353: COMISSÃO INTERNA DE PREVENÇÃO DE ACIDENTES
+Departamento capturado na linha 374: CONSELHO DE ADMINISTRAÇÃO
+Departamento capturado na linha 400: CONSELHO FISCAL
+Departamento capturado na linha 421: COORDENADORIA DE FINANÇAS
+Departamento capturado na linha 429: COORDENADORIA DE PAGAMENTO
+Departamento capturado na linha 440: DIRETORIA DE ADMINISTRAÇÃO E FINANÇAS
+Departamento capturado na linha 453: DIRETORIA DE TECNOLOGIA
+Departamento capturado na linha 469: GRUPO DE TRABALHO DE CIBERSEGURANÇA
+Departamento capturado na linha 485: PRESIDÊNCIA
+Departamento capturado na linha 501: PROTOCOLO
+Departamento capturado na linha 11: ÁREA FINANCEIRA E CONTÁBIL
+Departamento capturado na linha 39: ÁREA DE CONTRATAÇÃO E SERVIÇOS ADMINISTRATIVOS
+Departamento capturado na linha 72: ÁREA DE INFRAESTRUTURA
+Departamento capturado na linha 123: ÁREA DE PESSOAL
+Departamento capturado na linha 156: ÁREA DE SISTEMA DA INFORMAÇÃO
+Departamento capturado na linha 225: ARQUIVO
+Departamento capturado na linha 241: ASSESSORIA DE COMUNICAÇÃO
+Departamento capturado na linha 252: ASSESSORIA DE CONTROLE INTERNO
+Departamento capturado na linha 263: ASSESSORIA DE PLANEJAMENTO ESTRATÉGICO
+Departamento capturado na linha 271: ASSESSORIA JURÍDICA
+Departamento capturado na linha 290: COMISSÃO DE ESTAGIO
+Departamento capturado na linha 316: COMISSÃO DE LICITAÇÃO
+Departamento capturado na linha 329: COMISSÃO DISCIPLINAR PERMANENTE
+Departamento capturado na linha 340: COMISSÃO ELEITORAL
+Departamento capturado na linha 353: COMISSÃO INTERNA DE PREVENÇÃO DE ACIDENTES
+Departamento capturado na linha 374: CONSELHO DE ADMINISTRAÇÃO
+Departamento capturado na linha 400: CONSELHO FISCAL
+Departamento capturado na linha 421: COORDENADORIA DE FINANÇAS
+Departamento capturado na linha 429: COORDENADORIA DE PAGAMENTO
+Departamento capturado na linha 440: DIRETORIA DE ADMINISTRAÇÃO E FINANÇAS
+Departamento capturado na linha 453: DIRETORIA DE TECNOLOGIA
+Departamento capturado na linha 469: GRUPO DE TRABALHO DE CIBERSEGURANÇA
+Departamento capturado na linha 485: PRESIDÊNCIA
+Departamento capturado na linha 501: PROTOCOLO
