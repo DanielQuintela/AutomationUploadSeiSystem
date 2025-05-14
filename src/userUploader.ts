@@ -16,6 +16,24 @@ async function importaUsuarios() {
 
   // Ler o CSV convertido
   const rawData: string[] = fs.readFileSync(csvFilePath, 'utf-8').split('\n');
+
+  // Capturar todas as linhas que contêm departamentos
+  for (let i = 0; i < rawData.length; i++) {
+    const row = rawData[i].split(',').map((col) => col.trim());
+    if (row.some((col) => col.toLowerCase().startsWith('departamento:'))) {
+      const departamentoLinha = row.find((col) => col.toLowerCase().startsWith('departamento:'));
+      if (departamentoLinha) {
+        const match = departamentoLinha.match(/departamento:\s*(.*?)\s*-/i);
+        if (match && match[1]) {
+          const departamento = match[1].trim();
+          fs.appendFileSync('log-processamento.txt', `Departamento capturado na linha ${i}: ${departamento}\n`);
+        } else {
+          console.log(`Departamento não identificado na linha ${i}: ${departamentoLinha}`);
+        }
+      }
+    }
+  }
+
   // Localizar a linha do cabeçalho
   let headerLineIndex = -1;
   let header: string[] = [];
@@ -32,6 +50,25 @@ async function importaUsuarios() {
     console.error('❌ Não foi possível localizar as colunas Nome, Email ou CPF no arquivo.');
     return;
   }
+
+  // Verificar departamentos antes do cabeçalho
+  for (let i = 0; i < headerLineIndex; i++) {
+    const row = rawData[i].split(',').map((col) => col.trim());
+
+    if (row.some((col) => col.toLowerCase().startsWith('departamento:'))) {
+      const departamentoLinha = row.find((col) => col.toLowerCase().startsWith('departamento:'));
+
+      if (departamentoLinha) {
+        const match = departamentoLinha.match(/departamento:\s*(.*?)\s*-/i);
+        if (match && match[1]) {
+          departamentoAtual = match[1].trim(); // Atualizar o departamento atual
+        } else {
+          console.log(`Departamento não identificado na linha antes do cabeçalho: ${departamentoLinha}`);
+        }
+      }
+    }
+  }
+
   const nomeIndex = header.indexOf('nome');
   const emailIndex = header.indexOf('email');
   const cpfIndex = header.indexOf('cpf');
@@ -43,18 +80,6 @@ async function importaUsuarios() {
 
   for (let i = headerLineIndex + 1; i < rawData.length; i++) {
     const row = rawData[i].split(',').map((col) => col.trim());
-
-    if (row.some((col) => col.toLowerCase().startsWith('departamento:'))) {
-      const departamentoLinha = row.find((col) => col.toLowerCase().startsWith('departamento:'));
-      if (departamentoLinha) {
-        const match = departamentoLinha.match(/departamento:\s*(.*?)\s*-/i);
-        if (match && match[1]) {
-          departamentoAtual = match[1].trim(); // Atualizar o departamento atual
-          console.log(`Departamento identificado: ${departamentoAtual}`);
-        }
-      }
-      continue; 
-    };
     
     const Nome = row[nomeIndex];
     const Email = row[emailIndex];

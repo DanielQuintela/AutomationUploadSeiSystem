@@ -1,10 +1,9 @@
 export const unitMAP: Record<string, number> = {
-
   unidadeglobal: 110000000,
   unidadedeteste1: 110000001,
   unidadedetestes11: 110000002,
   unidadedetestes12: 110000003,
-  áreafinanceiraecontabil: 110000006,
+  áreafinanceiraecontábil: 110000006,
   áreadecontrataçãoeserviçosadministrativos: 110000008,
   áreadeinfraestrutura: 110000009,
   áreadepessoal: 110000010,
@@ -29,7 +28,5 @@ export const unitMAP: Record<string, number> = {
   diretoriadeadministraçãoefinanças: 110000028,
   diretoriadetecnologia: 110000029,
   grupodetrabalhodecibersegurança: 110000030,
-
-
 };
 

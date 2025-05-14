@@ -7,8 +7,6 @@ import { UploadUserPermitions } from "./repository/userRepository";
 export default async function userPermitions(usuarios: UserInterface[]) { 
     const permitions:UserPermitionsInterface[] = []
     
-    console.log( getPerfilId("colaborador"));
-    
     for (let i = 0; i < usuarios.length ; i++) {
 
         const acesso = usuarios[i].acesso.toLocaleLowerCase().replace(/\s+/g, '');
