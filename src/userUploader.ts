@@ -110,39 +110,6 @@ async function importaUsuarios() {
 
     lastId += 1;
 
-    // Verificar se a sigla já está cadastrada
-    const siglaJaCadastrada = usuarios.some(user => user.sigla === sigla);
-
-    if (siglaJaCadastrada) {
-      users.push({
-        id_usuario: lastId,
-        nome: Nome,
-        email: Email,
-        cpf: CPF,
-        sigla: sigla,
-        id_orgao: id_orgao,
-        sin_ativo: sin_ativo,
-        nome_registro_civil: nome_registro_civil,
-        sin_bloqueado: sin_bloqueado,
-        acesso: Acesso,
-        cargo: Cargo,
-        departamento: departamentoAtual,
-      });
-      continue;
-    }
-
-    usuarios.push({
-      id_usuario: lastId,
-      nome: Nome,
-      email: Email,
-      cpf: CPF,
-      sigla: sigla,
-      id_orgao: id_orgao,
-      sin_ativo: sin_ativo,
-      nome_registro_civil: nome_registro_civil,
-      sin_bloqueado: sin_bloqueado,
-    });
-
     users.push({
       id_usuario: lastId,
       nome: Nome,
@@ -156,6 +123,24 @@ async function importaUsuarios() {
       acesso: Acesso,
       cargo: Cargo,
       departamento: departamentoAtual,
+    });
+  
+    const siglaJaCadastrada = usuarios.some(user => user.sigla === sigla);
+
+    if (siglaJaCadastrada) {
+      continue;
+    }
+
+    usuarios.push({
+      id_usuario: lastId,
+      nome: Nome,
+      email: Email,
+      cpf: CPF,
+      sigla: sigla,
+      id_orgao: id_orgao,
+      sin_ativo: sin_ativo,
+      nome_registro_civil: nome_registro_civil,
+      sin_bloqueado: sin_bloqueado,
     });
   }
   
