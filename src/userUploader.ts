@@ -164,9 +164,9 @@ async function importaUsuarios() {
     return;
   }
 
-  // await uploadUsers(usuarios);
+  await uploadUsers(usuarios);
  
-  // userPermitions(users);
+  userPermitions(users);
 }
 
 importaUsuarios().catch(console.error);
