@@ -75,7 +75,7 @@ async function importaUsuarios() {
   const acesso = header.indexOf('perfil de acesso');
   const cargo = header.indexOf('cargo')
 
-  const [rows] = await connection.query('SELECT MAX(id_usuario) AS lastId FROM teste_usuario') as unknown as [LastIdResult[], any];
+  const [rows] = await connection.query(`SELECT MAX(id_usuario) AS lastId FROM ${process.env.USER_DB}`) as unknown as [LastIdResult[], any];
   let lastId = rows[0]?.lastId ?? 100000000;
 
   for (let i = headerLineIndex + 1; i < rawData.length; i++) {
@@ -164,9 +164,9 @@ async function importaUsuarios() {
     return;
   }
 
-  await uploadUsers(usuarios);
+  // await uploadUsers(usuarios);
  
-  // userPermitions(users);
+  userPermitions(users);
 }
 
 importaUsuarios().catch(console.error);

@@ -31,7 +31,6 @@ export default async function userPermitions(usuarios: UserInterface[]) {
             sin_subunidades: sin_subunidades
         });
     };
-
     await UploadUserPermitions(permitions);
     
 }

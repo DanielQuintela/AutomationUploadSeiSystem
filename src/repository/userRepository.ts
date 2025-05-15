@@ -30,7 +30,6 @@ export async function uploadUsers(usuarios: UserToDBInterface[]) {
 
 export async function UploadUserPermitions(permitions: UserPermitionsInterface[]) {
     const connection = await dbConnection();
-    // console.log(permitions);
 
     try {
         const permitionsArray = permitions.map(permission => [
@@ -49,6 +48,7 @@ export async function UploadUserPermitions(permitions: UserPermitionsInterface[]
         );
         console.log(`✅ Inseridas ${permitions.length} permissões no banco.!!`);
     } catch (error) {
+        await connection.end();
         console.error('❌ Erro ao inserir permissões:', error);
     } finally {
         await connection.end();
