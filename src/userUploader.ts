@@ -76,7 +76,8 @@ async function importaUsuarios() {
   const cargo = header.indexOf('cargo')
 
   const [rows] = await connection.query(`SELECT MAX(id_usuario) AS lastId FROM ${process.env.USER_DB}`) as unknown as [LastIdResult[], any];
-  let lastId = rows[0]?.lastId ?? 100000000;
+  // let lastId = rows[0]?.lastId ?? 100000000;
+  let lastId = 100000008
 
   for (let i = headerLineIndex + 1; i < rawData.length; i++) {
     const row = rawData[i].split(',').map((col) => col.trim());
@@ -109,27 +110,50 @@ async function importaUsuarios() {
     };
 
     lastId += 1;
+    async function funcPushUser(data: UserToDBInterface){
+        
+    }
 
-    users.push({
-      id_usuario: lastId,
-      nome: Nome,
-      email: Email,
-      cpf: CPF,
-      sigla: sigla,
-      id_orgao: id_orgao,
-      sin_ativo: sin_ativo,
-      nome_registro_civil: nome_registro_civil,
-      sin_bloqueado: sin_bloqueado,
-      acesso: Acesso,
-      cargo: Cargo,
-      departamento: departamentoAtual,
-    });
+    
   
     const siglaJaCadastrada = usuarios.some(user => user.sigla === sigla);
 
     if (siglaJaCadastrada) {
+      const usuarioExistente = usuarios.find(user => user.sigla === sigla);
+      const id_usuario = usuarioExistente ? usuarioExistente.id_usuario : 0;
+
+      users.push({
+        id_usuario: id_usuario,
+        nome: Nome,
+        email: Email,
+        cpf: CPF,
+        sigla: sigla,
+        id_orgao: id_orgao,
+        sin_ativo: sin_ativo,
+        nome_registro_civil: nome_registro_civil,
+        sin_bloqueado: sin_bloqueado,
+        acesso: Acesso,
+        cargo: Cargo,
+        departamento: departamentoAtual,
+      });
+
       continue;
     }
+
+    users.push({
+        id_usuario: lastId,
+        nome: Nome,
+        email: Email,
+        cpf: CPF,
+        sigla: sigla,
+        id_orgao: id_orgao,
+        sin_ativo: sin_ativo,
+        nome_registro_civil: nome_registro_civil,
+        sin_bloqueado: sin_bloqueado,
+        acesso: Acesso,
+        cargo: Cargo,
+        departamento: departamentoAtual,
+      });
 
     usuarios.push({
       id_usuario: lastId,
@@ -150,7 +174,7 @@ async function importaUsuarios() {
     return;
   }
 
-  await uploadUsers(usuarios);
+  // await uploadUsers(usuarios);
  
   userPermitions(users);
 }
