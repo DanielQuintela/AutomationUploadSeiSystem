@@ -107,14 +107,7 @@ async function importaUsuarios() {
       Cargo?.toLowerCase()  === 'cargo'
     ) {
       continue;
-    };
-
-    lastId += 1;
-    async function funcPushUser(data: UserToDBInterface){
-        
-    }
-
-    
+    };    
   
     const siglaJaCadastrada = usuarios.some(user => user.sigla === sigla);
 
@@ -139,7 +132,7 @@ async function importaUsuarios() {
 
       continue;
     }
-
+    lastId += 1;
     users.push({
         id_usuario: lastId,
         nome: Nome,
