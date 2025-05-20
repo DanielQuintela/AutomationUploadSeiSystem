@@ -11,7 +11,7 @@ export default async function userPermitions(usuarios: UserInterface[]) {
 
         const acesso = usuarios[i].acesso.toLocaleLowerCase().replace(/\s+/g, '');
         const unidade = usuarios[i].departamento.toLocaleLowerCase().replace(/\s+/g, '');
-
+        
         const id_perfil = getPerfilId(acesso);
         const id_unidade = getUnitID(unidade);
         
@@ -31,7 +31,9 @@ export default async function userPermitions(usuarios: UserInterface[]) {
             sin_subunidades: sin_subunidades
         });
     };
-    await UploadUserPermitions(permitions);
+
+    // console.log(permitions.length);
     
+    await UploadUserPermitions(permitions);
 }
 
