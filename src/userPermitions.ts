@@ -32,7 +32,7 @@ export default async function userPermitions(usuarios: UserInterface[]) {
         });
     };
 
-    console.log(permitions.length);
+    // console.log(permitions.length);
     
     await UploadUserPermitions(permitions);
 }

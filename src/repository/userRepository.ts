@@ -41,7 +41,7 @@ export async function UploadUserPermitions(permitions: UserPermitionsInterface[]
             permission.dta_inicio,
             permission.sin_subunidades
         ]);
-        fs.appendFileSync('log-processamento.txt', `: ${permitionsArray}\n`);
+        // fs.appendFileSync('log-processamento.txt', `: ${permitionsArray}\n`);
         await connection.query(
             `INSERT INTO ${process.env.PERMISSION_DB} (id_perfil, id_sistema, id_usuario, id_unidade, id_tipo_permissao, dta_inicio, sin_subunidades) VALUES ?`,
             [permitionsArray]

@@ -171,7 +171,7 @@ async function importaUsuarios() {
       sin_bloqueado: sin_bloqueado,
     });
   }
-  console.log(usuarios.length);
+  // console.log(usuarios.length);
   
   if (!usuarios.length) {
     console.log('❌ Nenhum usuário válido encontrado.');
