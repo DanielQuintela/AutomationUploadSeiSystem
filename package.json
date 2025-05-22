@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "npm run build && node dist/userUploader.js",
-    "fstart": "node dist/userUploader.js"
+    "fstart": "node dist/userUploader.js",
+    "upUnit": "npm run build && node dist/unitUploader.js"
   },
   "author": "Daniel Quintela",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "@types/xlsx": "^0.0.35",
     "dotenv": "^16.5.0",
     "fast-csv": "^5.0.2",
+    "iconv-lite": "^0.6.3",
     "mysql2": "^3.14.1",
     "xlsx": "^0.18.5"
   },

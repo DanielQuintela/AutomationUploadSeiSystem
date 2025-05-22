@@ -3,13 +3,13 @@ require('dotenv').config();
 import { LastIdResult } from './types/dbConfig';
 import userPermitions from './userPermitions';
 import { UserInterface, UserToDBInterface } from './types/users';
-import readXlsFunction from './services/readXlsFunction';
+import { readUserXlsFunction } from './services/readXlsFunction';
 import fs from 'fs';
 import { uploadUsers } from './repository/userRepository';
 
 async function importaUsuarios() {
   const connection = await dbConnection();
-  const csvFilePath = readXlsFunction()
+  const csvFilePath = readUserXlsFunction()
   const usuarios: UserToDBInterface[] = [];
   const users: UserInterface[] = [];
   let departamentoAtual = '';
@@ -73,7 +73,7 @@ async function importaUsuarios() {
   const emailIndex = header.indexOf('email');
   const cpfIndex = header.indexOf('cpf');
   const acesso = header.indexOf('perfil de acesso');
-  const cargo = header.indexOf('cargo')
+  const cargo = header.indexOf('cargo');
 
   const [rows] = await connection.query(`SELECT MAX(id_usuario) AS lastId FROM ${process.env.USER_DB}`) as unknown as [LastIdResult[], any];
   let lastId = rows[0]?.lastId ?? 100000000;
