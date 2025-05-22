@@ -11,7 +11,7 @@ async function importaUnidades() {
     const csvFilePath = readUnitFunction()
     const unidades: UnitInterface[] = []
  
-   const rawData: string[] = fs.readFileSync(csvFilePath, 'latin1').split('\n');
+   const rawData: string[] = fs.readFileSync(csvFilePath, 'utf8').split('\n');
 
     let headerLineIndex = -1;
     let header: string[] = [];
