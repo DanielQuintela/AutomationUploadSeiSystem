@@ -5,13 +5,15 @@ import { readUnitFunction } from "./services/readXlsFunction";
 import { LastIdResult } from "./types/dbConfig";
 import { UnitInterface } from "./types/units";
 import fs from 'fs';
+import iconv from 'iconv-lite';
 
 async function importaUnidades() {
     const connection = await dbConnection();
     const csvFilePath = readUnitFunction()
     const unidades: UnitInterface[] = []
  
-   const rawData: string[] = fs.readFileSync(csvFilePath, 'utf8').split('\n');
+    const buffer = fs.readFileSync(csvFilePath);
+    const rawData: string[] = iconv.decode(buffer, 'utf8').split('\n');
 
     let headerLineIndex = -1;
     let header: string[] = [];
@@ -49,7 +51,7 @@ async function importaUnidades() {
     const Nome = row[nomeIndex];
     const Sigla = row[siglaIndex];
 
-     const id_orgao = process.env.ID_ORGAO;
+    const id_orgao = process.env.ID_ORGAO;
     const sin_ativo = process.env.SIN_ATIVO;
     const sin_global = process.env.SIN_GLOBAL;
 

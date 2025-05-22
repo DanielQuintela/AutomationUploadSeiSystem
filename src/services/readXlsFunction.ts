@@ -2,6 +2,7 @@ import path from 'path';
 const os = require('os');
 import * as XLSX from 'xlsx';
 import fs from 'fs';
+import iconv from 'iconv-lite';
 
 function readUserXlsFunction() {
     const desktopDir = path.join(os.homedir(), 'Desktop', 'upload');
@@ -25,8 +26,10 @@ function readUnitFunction() {
     const sheet = workbook.Sheets[workbook.SheetNames[0]];
     const csvFilePath = path.resolve(__dirname, 'unidades.csv');
     const csvData = XLSX.utils.sheet_to_csv(sheet);
-    const buffer = Buffer.from(csvData, 'utf8');
-    fs.writeFileSync(csvFilePath, buffer);
+
+    const csvBuffer = iconv.encode(csvData, 'utf8');
+    fs.writeFileSync(csvFilePath, csvBuffer);
+
     
     return csvFilePath
 }
