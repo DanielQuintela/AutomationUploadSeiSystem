@@ -11,6 +11,17 @@ export default async function userPermitions(usuarios: UserInterface[]) {
 
         const acesso = usuarios[i].acesso.toLocaleLowerCase().replace(/\s+/g, '');
         const unidade = usuarios[i].departamento.toLocaleLowerCase().replace(/\s+/g, '');
+
+        // TODO: CRIAR LÓGICA PARA SEPARR COLABORADOR SEM ASSINATURA PARA COM ASSINATURA
+        if (acesso == "colaborador" || acesso == "colaboradorsga"){
+            // const permissao = usuarios[i].permissao.toLocaleLowerCase().replace(/\s+/g, '');
+            // if (permissao == "sim"){
+
+            // } 
+            // else if (permissao == "nao"){
+
+            // }
+        }
         
         const id_perfil = getPerfilId(acesso);
         const id_unidade = getUnitID(unidade);
