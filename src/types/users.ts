@@ -11,6 +11,8 @@ export interface UserInterface {
   acesso               : string;
   cargo                : string;
   departamento         : string;
+  assinante            : boolean;
+  certificado?          : boolean;
 };
 
 export interface UserToDBInterface {

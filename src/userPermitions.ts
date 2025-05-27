@@ -6,26 +6,26 @@ import { UploadUserPermitions } from "./repository/userRepository";
 
 export default async function userPermitions(usuarios: UserInterface[]) { 
     const permitions:UserPermitionsInterface[] = []
+    let id_perfil;
     
     for (let i = 0; i < usuarios.length ; i++) {
 
         const acesso = usuarios[i].acesso.toLocaleLowerCase().replace(/\s+/g, '');
         const unidade = usuarios[i].departamento.toLocaleLowerCase().replace(/\s+/g, '');
 
-        // TODO: CRIAR LÓGICA PARA SEPARR COLABORADOR SEM ASSINATURA PARA COM ASSINATURA
-        if (acesso == "colaborador" || acesso == "colaboradorsga"){
-            // const permissao = usuarios[i].permissao.toLocaleLowerCase().replace(/\s+/g, '');
-            // if (permissao == "sim"){
+        // Lógica para separar colaborador assinante e não assinante
+        if (acesso === "colaborador" || acesso === "colaboradorsga") {
+            const assinante = usuarios[i].assinante;            
+            if (assinante === true) {
+                id_perfil = getPerfilId('basicosei');
+            } else {
+                id_perfil = getPerfilId(acesso);
+            }
+        } else {
+            id_perfil = getPerfilId(acesso);
+        };
 
-            // } 
-            // else if (permissao == "nao"){
-
-            // }
-        }
-        
-        const id_perfil = getPerfilId(acesso);
         const id_unidade = getUnitID(unidade);
-        
         const id_usuario = usuarios[i].id_usuario;
         const id_sistema = process.env.ID_SISTEMA ? Number(process.env.ID_SISTEMA) : undefined;
         const sin_subunidades = process.env.SIN_SUBUNIDADES || '';
