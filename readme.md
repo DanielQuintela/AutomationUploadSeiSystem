@@ -22,6 +22,14 @@ Do **usuário atual do sistema**.
 
 ---
 
+Para o upload de Unidades, é esperado no mesmo local de pasta de usuário
+
+O script espera encontrar um arquivo chamado:
+
+```
+unidades.xls
+```
+
 ## 📦 Tecnologias Utilizadas
 
 - Node.js
@@ -54,7 +62,19 @@ npm start
 Ou diretamente com Node:
 
 ```bash
-node dist/scriptConversor.js
+node dist/userUploader.js
+```
+
+### 4. Para subir apenas as unidades
+
+```bash
+npm run upUnit
+```
+
+### 5. Para rodar sem compilar uma nova dist (execução rápida)
+
+```bash
+npm run fstart
 ```
 
 ---
