@@ -89,6 +89,8 @@ ID_ORGAO=
 - O script localiza o arquivo `usuarios.xls` no caminho padrão.
 - Os dados são lidos e tratados conforme o esperado.
 - Cada usuário é inserido na base de dados `sip`.
+- O script localiza o arquivo `unidades.xls`.
+- Os dados são lidos e armazenados conforme os órgãos no `.env`.
 
 ---
 
