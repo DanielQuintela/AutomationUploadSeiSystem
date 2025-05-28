@@ -80,8 +80,8 @@ async function importaUsuarios() {
   let lastId = rows[0]?.lastId ?? 100000000;
   // let lastId = 100000008
   // TODO: REMOVER ESSA FUNÇÃO ABAIXO. APENAS PARA TESTE DE ID
-  let lastIdR = lastId - 2000000
-  console.log(lastIdR);
+  lastId = lastId - 2000000
+  console.log(lastId);
   
   for (let i = headerLineIndex + 1; i < rawData.length; i++) {
     const row = rawData[i].split(',').map((col) => col.trim());
@@ -144,7 +144,7 @@ async function importaUsuarios() {
         nome: Nome,
         email: Email,
         cpf: CPF,
-        sigla: sigla,
+        sigla: sigla + "d",
         id_orgao: id_orgao,
         sin_ativo: sin_ativo,
         nome_registro_civil: nome_registro_civil,
@@ -164,7 +164,7 @@ async function importaUsuarios() {
         nome: Nome,
         email: Email,
         cpf: CPF,
-        sigla: sigla,
+        sigla: sigla + "d",
         id_orgao: id_orgao,
         sin_ativo: sin_ativo,
         nome_registro_civil: nome_registro_civil,
@@ -180,7 +180,7 @@ async function importaUsuarios() {
       nome: Nome,
       email: Email,
       cpf: CPF,
-      sigla: sigla,
+      sigla: sigla + "d",
       id_orgao: id_orgao,
       sin_ativo: sin_ativo,
       nome_registro_civil: nome_registro_civil,
