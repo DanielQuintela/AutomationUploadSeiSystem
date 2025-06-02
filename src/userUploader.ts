@@ -75,12 +75,20 @@ async function importaUsuarios() {
   const acesso = header.indexOf('perfil de acesso');
   const cargo = header.indexOf('cargo');
   const assinante = header.indexOf('assinante')
+  function gerarNumeroAleatorio(min:number, max:number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+let numeroAleatorio = gerarNumeroAleatorio(1, 99);
 
   const [rows] = await connection.query(`SELECT MAX(id_usuario) AS lastId FROM ${process.env.USER_DB}`) as unknown as [LastIdResult[], any];
   let lastId = rows[0]?.lastId ?? 100000000;
-  // let lastId = 100000008
-  // TODO: REMOVER ESSA FUNÇÃO ABAIXO. APENAS PARA TESTE DE ID
-  lastId = lastId - 2000000
+  if (lastId > 100000000){
+    lastId = lastId - 2000000
+    lastId = lastId + numeroAleatorio
+  }
+
+  
   console.log(lastId);
   
   for (let i = headerLineIndex + 1; i < rawData.length; i++) {
