@@ -77,11 +77,10 @@ async function importaUsuarios() {
   const assinante = header.indexOf('assinante')
 
   const [rows] = await connection.query(`SELECT MAX(id_usuario) AS lastId FROM ${process.env.USER_DB}`) as unknown as [LastIdResult[], any];
-  let lastId = rows[0]?.lastId ?? 100000000;
-  // let lastId = 100000008
-  // TODO: REMOVER ESSA FUNÇÃO ABAIXO. APENAS PARA TESTE DE ID
-  lastId = lastId - 2000000
-  console.log(lastId);
+  // TODO: Talvez seja necessário ajustar o valor inicial de lastId
+  // para evitar conflitos com o SEI caso o SEI seja corrigido
+  let lastId = rows[0]?.lastId ?? 400000000;
+  lastId = lastId + 80000000 // Incrementação para evitar conflitos com o SEI
   
   for (let i = headerLineIndex + 1; i < rawData.length; i++) {
     const row = rawData[i].split(',').map((col) => col.trim());
@@ -144,7 +143,7 @@ async function importaUsuarios() {
         nome: Nome,
         email: Email,
         cpf: CPF,
-        sigla: sigla + "d",
+        sigla: sigla,
         id_orgao: id_orgao,
         sin_ativo: sin_ativo,
         nome_registro_civil: nome_registro_civil,
@@ -187,7 +186,6 @@ async function importaUsuarios() {
       sin_bloqueado: sin_bloqueado,
     });
   }
-  // console.log(usuarios.length);
   
   if (!usuarios.length) {
     console.log('❌ Nenhum usuário válido encontrado.');

@@ -34,7 +34,10 @@ async function importaUnidades() {
     const siglaIndex = header.indexOf('sigla');
 
     const [rows] = await connection.query(`SELECT MAX(id_unidade) AS lastId FROM ${process.env.UNIT_DB}`) as unknown as [LastIdResult[], any];
-    let lastId = rows[0]?.lastId ?? 100000000;
+    //TODO: Talvez seja necessário ajustar o valor inicial de lastId
+    // para evitar conflitos com o SEI caso o SEI seja corrigido
+    let lastId = rows[0]?.lastId ?? 900000000;
+    lastId = lastId + 80000000 // Incrementação para evitar conflitos com o SEI
 
     for (let i = headerLineIndex + 1; i < rawData.length; i++) {
     const row = rawData[i].split(',').map((col) => col.trim());
